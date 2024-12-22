@@ -56,6 +56,7 @@ function BillInput({ bill, onBillInput }) {
     <form>
       <label>How much was the bill?</label>
       <input
+        type="number"
         placeholder="Bill Amount"
         value={bill}
         onChange={(e) => onBillInput(e)}
