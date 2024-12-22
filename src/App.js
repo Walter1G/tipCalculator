@@ -10,7 +10,7 @@ export default function App() {
 }
 
 function TipCalculator() {
-  const [bill, setBill] = useState(0);
+  const [bill, setBill] = useState("");
   const [service1, setService1] = useState(0);
   const [service2, setService2] = useState(0);
   let average = (service1 + service2) / 2;
@@ -39,8 +39,14 @@ function TipCalculator() {
         onSelect={setService2}
         value={service2}
       />
-      <OutPut bill={bill} tip={tip} />
-      <Reset onReset={handleReset} />
+      {bill > 0 ? (
+        <>
+          <OutPut bill={bill} tip={tip} />
+          <Reset onReset={handleReset} />{" "}
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 }
@@ -49,7 +55,11 @@ function BillInput({ bill, onBillInput }) {
   return (
     <form>
       <label>How much was the bill?</label>
-      <input value={bill} onChange={(e) => onBillInput(e)} />
+      <input
+        placeholder="Bill Amount"
+        value={bill}
+        onChange={(e) => onBillInput(e)}
+      />
     </form>
   );
 }
@@ -69,7 +79,7 @@ function SelectPercentage({ question, onSelect, value }) {
 function OutPut({ bill, tip }) {
   return (
     <p>
-      <b>{`You pay ${bill + tip} ($${bill} + $${tip}tip)`}</b>
+      <b>{`You pay  $${bill + tip} ($${bill} + $${tip}tip)`}</b>
     </p>
   );
 }
